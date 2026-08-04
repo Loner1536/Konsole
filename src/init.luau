@@ -126,14 +126,16 @@ function Konsole.excludeBuiltins(...: string): ()
 end
 
 --[[
-	@description drops every built-in command. Must be called before Konsole
-	is used.
-	@time July 28, 2026
+	@description drops every built-in command. cmds/clear are spared by default
+	since they're the only way to see or recover the command list once
+	everything else is gone — pass `true` to drop them too. Must be called
+	before Konsole is used.
+	@time July 29, 2026
 ]]
-function Konsole.excludeAllBuiltins(): ()
+function Konsole.excludeAllBuiltins(includeMandatory: boolean?): ()
 	assert(not registered, "Konsole.excludeAllBuiltins must be called before Konsole is used")
 	assert(builtinsIncluded == nil, "Konsole.excludeAllBuiltins cannot be used together with Konsole.includeBuiltins")
-	builtinsExcluded = { all = true }
+	builtinsExcluded = { all = true, dropMandatory = includeMandatory == true }
 end
 
 --[[

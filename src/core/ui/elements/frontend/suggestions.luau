@@ -334,14 +334,16 @@ function Suggestions.attach(Session)
 		local chip = if type(self.focusedChip) == "function" then self:focusedChip() else self.activeChip
 		local dupeNames = {}
 
-		if chip and type(chip.arg) == "table" and chip.arg.type == "players" then
+		if chip and type(chip.arg) == "table" and (chip.arg.type == "players" or chip.arg.type == "list") then
 			dupeNames = confirmedPlayerNames(chip.box.Text)
 
-			-- "me" and the local player's own name refer to the same entry
-			local localName = string.lower(Imports.Players.LocalPlayer.Name)
-			if dupeNames["me"] or dupeNames[localName] then
-				dupeNames["me"] = true
-				dupeNames[localName] = true
+			if chip.arg.type == "players" then
+				-- "me" and the local player's own name refer to the same entry
+				local localName = string.lower(Imports.Players.LocalPlayer.Name)
+				if dupeNames["me"] or dupeNames[localName] then
+					dupeNames["me"] = true
+					dupeNames[localName] = true
+				end
 			end
 		end
 
@@ -462,7 +464,7 @@ function Suggestions.attach(Session)
 		local chip = if type(self.focusedChip) == "function" then self:focusedChip() else self.activeChip
 		if chip and typeof(chip.box) == "Instance" and chip.box:IsA("TextBox") then
 
-			if chip.arg and chip.arg.type == "players" then
+			if chip.arg and (chip.arg.type == "players" or chip.arg.type == "list") then
 				if not self:playersEntryAllowed(chip.box.Text, suggestion) then
 					return false
 				end

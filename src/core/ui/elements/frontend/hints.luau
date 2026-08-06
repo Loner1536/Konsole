@@ -107,7 +107,8 @@ local function fixedTokenArg(arg)
 end
 
 local function playersListArg(arg)
-	return string.lower(tostring(arg.type or "string")) == "players"
+	local typeName = string.lower(tostring(arg.type or "string"))
+	return typeName == "players" or typeName == "list"
 end
 
 local isCollectiveKeyword = Imports.Arguments.isCollectiveKeyword
@@ -155,6 +156,11 @@ local function argValid(arg, text)
 	end
 
 	local typeName = string.lower(tostring(arg.type or "string"))
+
+	if typeName == "list" then
+		local ok = Imports.Arguments.parseList("[" .. text .. "]", arg.suggestions)
+		return ok == true
+	end
 
 	local convert = Imports.Arguments.types[typeName]
 

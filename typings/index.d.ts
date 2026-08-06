@@ -41,6 +41,13 @@ declare namespace Konsole {
 				default?: never;
 				required?: boolean;
 				suggestions?: never;
+		}
+		| {
+				name?: string;
+				type: "list";
+				default?: never;
+				required?: boolean;
+				suggestions: readonly string[] | (() => readonly string[]);
 		};
 
 	export interface Outcome {
@@ -97,6 +104,7 @@ declare namespace Konsole {
 		T["type"] extends "boolean" ? boolean :
 		T["type"] extends "player" ? Player :
 		T["type"] extends "players" ? Player[] :
+		T["type"] extends "list" ? string[] :
 		string;
 
 	export type PanelPosition =

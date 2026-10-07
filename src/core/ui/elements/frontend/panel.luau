@@ -546,8 +546,11 @@ function Panel.attach(Session)
 		local suggList = scrollingFrame(refs.suggList)
 		if suggList and suggList.Visible and not self.suggestionsHiding then
             local suggestionWidth = suggList.Parent == refs.secondRoot and self:activeWidth(2) or width
+			local visibleCount = math.min(#self.currentSuggestions, panel.maxSuggestions or 5)
+			local suggestionPadding = panel.suggestionPadding or 4
+			local suggestionHeight = (visibleCount * panel.suggestionHeight) + (suggestionPadding * 2)
 
-			suggList.Size = UDim2.fromOffset(suggestionWidth, suggList.Size.Y.Offset)
+			suggList.Size = UDim2.fromOffset(suggestionWidth, suggestionHeight)
         end
     end
 

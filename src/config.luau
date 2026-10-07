@@ -63,6 +63,7 @@ Config.groups = {
 		suggestionRadius = 10,
 
 		suggestionHeight = 26,
+		suggestionPadding = 4,
 		maxSuggestions = 5,
 		suggestionGap = 8,
 

@@ -261,6 +261,7 @@ declare namespace Konsole {
 			viewportTopInset: number;
 			hintHeight: number;
 			suggestionHeight: number;
+			suggestionPadding: number;
 			suggestionGap: number;
 			suggestionRadius: number;
 			maxSuggestions: number;

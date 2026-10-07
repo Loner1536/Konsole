@@ -300,7 +300,7 @@ function Suggestions.attach(Session)
 		local suggList = self.refs.suggList
 		if suggList:IsA("ScrollingFrame") then
 			local rowHeight = self.config.panel.suggestionHeight
-			local top = 2 + ((self.selectedSuggestion - 1) * rowHeight)
+			local top = (self.config.panel.suggestionPadding or 4) + ((self.selectedSuggestion - 1) * rowHeight)
 
 			local position = suggList.CanvasPosition.Y
 			local bottom = top + rowHeight
@@ -370,7 +370,9 @@ function Suggestions.attach(Session)
         self:placeSuggestions()
 
 		suggList.CanvasPosition = Vector2.zero
-		suggList.CanvasSize = UDim2.fromOffset(0, (count * panel.suggestionHeight) + 4)
+		local suggestionPadding = panel.suggestionPadding or 4
+		local canvasHeight = (count * panel.suggestionHeight) + (suggestionPadding * 2)
+		suggList.CanvasSize = UDim2.fromOffset(0, canvasHeight)
         
 		for _, child in suggList:GetChildren() do
 			if child:IsA("TextButton") then

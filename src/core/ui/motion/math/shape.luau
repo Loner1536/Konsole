@@ -445,8 +445,13 @@ function Shape.layoutDetachedSecond(session, duration, targetWidth)
 		and session.refs.suggList:IsA("ScrollingFrame")
 		and session.refs.suggList.Parent == session.refs.secondRoot
 	then
+		local panel = session.config.panel
+		local visibleCount = math.min(#session.currentSuggestions, panel.maxSuggestions or 5)
+		local suggestionPadding = panel.suggestionPadding or 4
+		local suggestionHeight = (visibleCount * panel.suggestionHeight) + (suggestionPadding * 2)
+
 		Tween.to(session.refs.suggList, {
-			Size = UDim2.fromOffset(width, session.refs.suggList.Size.Y.Offset),
+			Size = UDim2.fromOffset(width, suggestionHeight),
 		}, time)
 	end
 

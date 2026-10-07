@@ -477,7 +477,8 @@ function View.createTree(session, gui)
         Padding = UDim.new(0, 0),
     }, suggList)
 
-    View.padding(suggList, 0, 2, 0, 2)
+    local suggestionPadding = panel.suggestionPadding or 4
+    View.padding(suggList, 0, suggestionPadding, 0, suggestionPadding)
 
     refs.suggList = suggList
 

@@ -83,6 +83,7 @@ export type PanelGroup = {
 
 	historyLineHeight: number,
 	suggestionHeight: number,
+	suggestionPadding: number,
 	suggestionRadius: number,
 
 	viewportTopInset: number,

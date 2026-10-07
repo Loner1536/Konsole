@@ -51,7 +51,9 @@ function Suggest.reveal(session, count)
 	local suggList = refs.suggList
 	local startPosition, anchorPoint = suggestionPosition(session, 1)
 	local openPosition = suggestionPosition(session, panel.suggestionGap)
-	local targetSize = UDim2.fromOffset(suggestionWidth(session), (count * panel.suggestionHeight) + 4)
+	local suggestionPadding = panel.suggestionPadding or 4
+	local targetHeight = (count * panel.suggestionHeight) + (suggestionPadding * 2)
+	local targetSize = UDim2.fromOffset(suggestionWidth(session), targetHeight)
 
     suggList.AnchorPoint = anchorPoint
     suggList.Position = startPosition
